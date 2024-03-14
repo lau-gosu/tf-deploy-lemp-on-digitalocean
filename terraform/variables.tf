@@ -19,7 +19,7 @@ variable "droplet_size" {
 }
 # Choose your domain name:
 variable "domain_name" {
-  description = "Domain name, eg: cofetariaboem.ro"
+  description = "Domain name"
   default = "cofetariaboem.ro"
 }
 
