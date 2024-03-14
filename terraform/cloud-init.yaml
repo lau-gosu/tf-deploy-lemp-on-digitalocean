@@ -1,0 +1,82 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+users:
+    - name: do-user
+      lock_passwd: true
+      shell: /bin/bash
+      ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAiFmmyy71sr5F48Yo1q3VGIHu8XKG6ysFE3EPu/tp50IGc11m3ibIP4C7uD4VwjRFI1GzPGMtqH81kQqnoBdBOyN7V0uxBd+Kt93qai3tvHfEuAKiZC1+unz6r5UwuOMEfYQ8OQKbDy7iawZ36TFZiEtSclAb3YBklFVktHqgpjvRQNvcM10Ox0nL5c8lZE5DAWj7BnC3dziTsYEB3EUwIzzJmwh4PEdx1tKuwX4xYOVtkAV+UycOKqU9ZvrGUsdZI0k2ji/osEW/ud5stusdEuIPMyUEL37znnHlFmI7z8YzRXOG/V5qQFlEv1gI3Y4WMgu6jwDwlBDOpC9QCJIejQ==
+      sudo: ALL=(ALL) NOPASSWD:ALL
+#disable_root: true
+packages:
+  - net-tools
+  - rpm
+  - nginx
+  - mysql-server
+  - php-fpm 
+  - php-mysql
+
+write_files:
+  - path: /etc/nginx/sites-available/${my_domain_name}
+    content: |
+      server {
+        listen 80;
+        root /var/www/${my_domain_name};
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name ${my_domain_name} www.${my_domain_name};
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        }
+
+        location ~ /\.ht {
+        deny all;
+        }
+      }
+  
+  - path: /var/www/${my_domain_name}/index.html
+    content: |
+        <html>
+            <head>
+                <title>Welcome to Cofetaria BOEM!</title>
+            </head>
+            <body>
+                <h1>Success!  The Cofetaria BOEM server block is working!</h1>
+            </body>
+        </html>
+
+
+runcmd:
+  - systemctl restart nginx
+  - systemctl enable nginx
+  - systemctl start mysql.service
+  - systemctl enable mysql.service
+   # TBD: run: mysql_secure_installation
+
+  # Nginx Confguration:
+  - mkdir -p /var/www/${my_domain_name} 
+  - chmod -R 755 /var/www/${my_domain_name}
+  - chown -R www-data:www-data /var/www/
+  - ln -s /etc/nginx/sites-available/${my_domain_name} /etc/nginx/sites-enabled/
+  - unlink /etc/nginx/sites-enabled/default
+  - sed -i 's/# server_names_hash_bucket_size 64/server_names_hash_bucket_size 64/' /etc/nginx/nginx.conf
+  - systemctl reload nginx
+  # Certbot:
+  - snap install core
+  - snap refresh core
+  - snap install --classic certbot
+  - ln -s /snap/bin/certbot /usr/bin/certbot
+  #manual: certbot --nginx -d ${my_domain_name} -d ${my_domain_name}
+  
+  
+ 
