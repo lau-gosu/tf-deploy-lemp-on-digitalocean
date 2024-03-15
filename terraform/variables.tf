@@ -21,3 +21,7 @@ variable "reserved_ip" {
 variable "ssh_key" {
   description = "Your SSH key"
 }
+variable "allowed_ips" {
+  description = "List of IPs to be allowed in firewall"
+  type        = list(string)
+}
