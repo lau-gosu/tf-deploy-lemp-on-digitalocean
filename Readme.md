@@ -4,7 +4,7 @@
  - Add your public SSH KEY 
  - Create a Reserved IP and make sure your domain-name points to it(A record)
 
-##### 2. On Your Laptop:
+##### 2. On your Laptop:
 ###### 2.1 Install Terraform
 ###### 2.2 Update terraform.tfvars then run:
  - export DO_PAT="YOUR DO TOKEN"
