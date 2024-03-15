@@ -76,7 +76,4 @@ runcmd:
   - snap refresh core
   - snap install --classic certbot
   - ln -s /snap/bin/certbot /usr/bin/certbot
-  #manual: certbot --nginx -d ${my_domain_name} -d ${my_domain_name}
-  
-  
- 
+  #manual: certbot --nginx -d ${my_domain_name} -d ${my_domain_name} -n -m laurentiu.gosu@gmail.com --agree-tos

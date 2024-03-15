@@ -12,8 +12,12 @@ variable "droplet_image" {
 variable "droplet_size" {
   description = "Droplet size for server"
 }
-# Choose your domain name:
 variable "domain_name" {
   description = "Domain name"
 }
-
+variable "reserved_ip" {
+  description = "Your Static IP"
+}
+variable "ssh_key" {
+  description = "Your SSH key"
+}
