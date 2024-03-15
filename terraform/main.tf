@@ -22,6 +22,11 @@ resource "digitalocean_droplet" "lemp" {
 
 }
 
+# resource "digitalocean_reserved_ip_assignment" "lemp-reserved-ip" {
+#   ip_address = data.digitalocean_reserved_ip.lemp-reserved-ip.ip_address
+#   droplet_id = digitalocean_droplet.lemp.id
+# }
+
 # Reserved/Fixed IP
 resource "digitalocean_reserved_ip" "lemp-fixed-ip" {
   droplet_id = digitalocean_droplet.lemp.id
@@ -70,10 +75,11 @@ resource "digitalocean_firewall" "lemp-fw" {
 }
 
 
-output "droplet_ip_address" {
-    value = digitalocean_droplet.lemp.ipv4_address
-}
+# output "droplet_ip_address" {
+#     value = digitalocean_droplet.lemp.ipv4_address
+# }
 
 output "droplet_fixed_ip" {
     value = digitalocean_reserved_ip.lemp-fixed-ip.ip_address
+    #value = data.digitalocean_reserved_ip.lemp-reserved-ip.ip_address
 }

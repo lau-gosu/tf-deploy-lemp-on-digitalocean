@@ -14,3 +14,6 @@ provider "digitalocean" {
 data "digitalocean_ssh_key" "my_ssh_key" {
   name = "LauG"
 }
+# data "digitalocean_reserved_ip" "lemp-reserved-ip" {
+#   name = "????"
+# }
