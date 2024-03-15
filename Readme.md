@@ -1,7 +1,7 @@
 ##### 1. Install Terraform
 ##### 2. Create your DO Token
 ##### 3. Add your public SSH KEY to DO
-##### 4. Update variables.tf & provider.tf(ssh_key_name):
+##### 4. Update terraform.tfvars & provider.tf(ssh_key_name):
  - export DO_PAT="YOUR DO TOKEN"
  - terraform init
  - terraform plan -var do_token=$DO_PAT
