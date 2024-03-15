@@ -5,8 +5,8 @@
  - Create a Reserved IP and make sure your domain-name points to it(A record)
 
 ##### 2. On your Laptop:
-###### 2.1 Install Terraform
-###### 2.2 Update terraform.tfvars then run:
+###### 2.1. Install Terraform
+###### 2.2. Update terraform.tfvars then run:
  - export DO_PAT="YOUR DO TOKEN"
  - terraform init
  - terraform plan -var do_token=$DO_PAT
