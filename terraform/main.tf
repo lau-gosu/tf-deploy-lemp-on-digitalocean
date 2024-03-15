@@ -28,7 +28,7 @@ resource "digitalocean_droplet" "lemp" {
 # }
 
 # Reserved/Fixed IP
-resource "digitalocean_reserved_ip" "lemp-fixed-ip" {
+resource "digitalocean_reserved_ip" "lemp-reserved-ip" {
   droplet_id = digitalocean_droplet.lemp.id
   region     = digitalocean_droplet.lemp.region
 }
@@ -80,6 +80,6 @@ resource "digitalocean_firewall" "lemp-fw" {
 # }
 
 output "droplet_fixed_ip" {
-    value = digitalocean_reserved_ip.lemp-fixed-ip.ip_address
+    value = digitalocean_reserved_ip.lemp-reserved-ip.ip_address
     #value = data.digitalocean_reserved_ip.lemp-reserved-ip.ip_address
 }
