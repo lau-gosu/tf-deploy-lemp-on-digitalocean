@@ -43,7 +43,11 @@ resource "digitalocean_firewall" "lemp-fw" {
     protocol         = "tcp"
     port_range       = "22"
     source_addresses = var.allowed_ips
-    #source_addresses = ["79.117.151.178/32", "1.1.1.1/32"]
+  }
+    inbound_rule {
+    protocol         = "tcp"
+    port_range       = "3306"
+    source_addresses = var.allowed_ips
   }
   inbound_rule {
     protocol         = "tcp"
