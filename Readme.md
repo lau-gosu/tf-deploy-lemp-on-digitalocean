@@ -19,3 +19,9 @@
 - secure mysql by running: mysql_secure_installation
 - create your mysql database and access credentials
 
+
+##### Sources:
+- https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04
+- https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04
+- https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04
+
